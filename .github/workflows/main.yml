@@ -1,0 +1,3 @@
+name: Project Actions
+
+on: workflow_dispatch
