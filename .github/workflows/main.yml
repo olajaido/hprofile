@@ -38,6 +38,7 @@ jobs:
                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/
 
     BUILD_AND_PUBLISH:
+        needs: CICD
 
         runs-on: ubuntu-latest
         steps:
@@ -49,7 +50,7 @@ jobs:
                 sed -i "s/^jdbc.username.*$/jdbc.username\=${{ secrets.RDS_USER }}/" src/main/resources/application.properties
                 sed -i "s/^jdbc.password.*$/jdbc.password\=${{ secrets.RDS_PASS }}/" src/main/resources/application.properties
                 sed -i "s/db01/${{ secrets.RDS_ENDPOINT }}/" src/main/resources/application.properties
-                
+
             - name: Build and Deploy steps
               uses: appleboy/docker-ecr-action@master
               with:
